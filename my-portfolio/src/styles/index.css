@@ -1,0 +1,617 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Fira+Code:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    @apply bg-light dark:bg-dark text-gray-900 dark:text-gray-100 transition-colors duration-300 overflow-x-hidden;
+  }
+  
+  img {
+    @apply max-w-full h-auto;
+  }
+  
+  section {
+    @apply overflow-x-hidden;
+  }
+}
+
+@layer components {
+  .nav-link {
+    @apply relative text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors duration-300 font-medium;
+  }
+  
+  .nav-link:after {
+    @apply content-[''] absolute bg-primary-600 dark:bg-primary-400 h-[2px] w-0 left-0 -bottom-1 rounded-full transition-all duration-300;
+  }
+  
+  .nav-link:hover:after {
+    @apply w-full;
+  }
+  
+  .section-heading {
+    @apply text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-6 relative;
+  }
+  
+  .section-heading:after {
+    @apply content-[''] absolute left-0 -bottom-2 h-1 w-20 bg-primary-600 dark:bg-primary-400 rounded-full;
+  }
+  
+  .gradient-text {
+    @apply bg-gradient-to-r from-primary-600 to-secondary-600 dark:from-primary-400 dark:to-secondary-400 bg-clip-text text-transparent;
+  }
+  
+  .card {
+    @apply bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-2xl p-6 shadow-card hover:shadow-lg transition-all duration-300;
+  }
+}
+
+.animate-gradient {
+  background-size: 200% 200%;
+  animation: gradientAnimation 3s ease infinite;
+}
+
+@keyframes gradientAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Premium Apple-style Scroll Animations for Backend & Cloud Role */
+.animate-on-scroll {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, opacity;
+}
+
+.animate-on-scroll.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Apple-style slide in animations - optimized for scroll performance */
+.slide-in-left {
+  opacity: 0;
+  transform: translateX(-50px);
+  transition: opacity 1.5s cubic-bezier(0.16, 1, 0.3, 1), transform 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  transform-style: preserve-3d;
+  transform: translateX(-50px) translateZ(0);
+}
+
+.slide-in-right {
+  opacity: 0;
+  transform: translateX(50px);
+  transition: opacity 1.5s cubic-bezier(0.16, 1, 0.3, 1), transform 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  transform-style: preserve-3d;
+  transform: translateX(50px) translateZ(0);
+}
+
+.slide-in-left.visible, .slide-in-right.visible {
+  opacity: 1;
+  transform: translateX(0) translateZ(0);
+}
+
+/* Scroll-triggered animations for sections */
+.scroll-animate-left {
+  opacity: 0;
+  transform: translateX(-60px) translateZ(0);
+  transition: opacity 1.2s cubic-bezier(0.2, 0.8, 0.2, 1), transform 1.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+}
+
+.scroll-animate-right {
+  opacity: 0;
+  transform: translateX(60px) translateZ(0);
+  transition: opacity 1.2s cubic-bezier(0.2, 0.8, 0.2, 1), transform 1.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+}
+
+.scroll-animate-left.in-view, .scroll-animate-right.in-view {
+  opacity: 1;
+  transform: translateX(0) translateZ(0);
+}
+
+/* Staggered animation for child elements when section comes into view */
+.stagger-on-scroll > * {
+  opacity: 0;
+  transform: translateY(20px);
+  transition-property: opacity, transform;
+  transition-duration: 0.8s;
+  transition-timing-function: cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.stagger-on-scroll.in-view > *:nth-child(1) { transition-delay: 0.1s; }
+.stagger-on-scroll.in-view > *:nth-child(2) { transition-delay: 0.2s; }
+.stagger-on-scroll.in-view > *:nth-child(3) { transition-delay: 0.3s; }
+.stagger-on-scroll.in-view > *:nth-child(4) { transition-delay: 0.4s; }
+.stagger-on-scroll.in-view > *:nth-child(5) { transition-delay: 0.5s; }
+.stagger-on-scroll.in-view > *:nth-child(6) { transition-delay: 0.6s; }
+.stagger-on-scroll.in-view > *:nth-child(7) { transition-delay: 0.7s; }
+.stagger-on-scroll.in-view > *:nth-child(8) { transition-delay: 0.8s; }
+
+.stagger-on-scroll.in-view > * {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.stagger-item {
+  opacity: 0;
+  transform: translateY(20px);
+  transition-property: opacity, transform;
+  transition-duration: 0.7s;
+  transition-timing-function: cubic-bezier(0.33, 1, 0.68, 1);
+}
+
+.staggered-container.visible .stagger-item {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Unique backend/cloud animations */
+.server-pulse {
+  animation: server-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes server-pulse {
+  0%, 100% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.data-flow {
+  stroke-dasharray: 10;
+  stroke-dashoffset: 200;
+  animation: data-flow 5s linear infinite;
+}
+
+@keyframes data-flow {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.cloud-float {
+  animation: cloud-float 8s ease-in-out infinite;
+}
+
+@keyframes cloud-float {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-8px) scale(1.02);
+  }
+}
+
+/* Apple-style parallax effects */
+.parallax-slow {
+  will-change: transform;
+  transform: translateY(var(--parallax-offset, 0));
+  transition: transform 0.2s cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+
+.parallax-medium {
+  will-change: transform;
+  transform: translateY(calc(var(--parallax-offset, 0) * 1.5));
+  transition: transform 0.2s cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+
+.parallax-fast {
+  will-change: transform;
+  transform: translateY(calc(var(--parallax-offset, 0) * 2));
+  transition: transform 0.2s cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+
+/* 3D Card effect */
+.card-3d {
+  transform-style: preserve-3d;
+  transform: perspective(1000px) rotateX(var(--rotate-x, 0)) rotateY(var(--rotate-y, 0));
+  transition: transform 0.1s ease-out;
+}
+
+/* Specialized animations for backend role */
+.database-pulse {
+  transform-origin: center;
+  animation: database-pulse 3s ease-in-out infinite;
+}
+
+@keyframes database-pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 1;
+  }
+}
+
+/* Cloud service animation */
+.service-hover {
+  transition: all 0.3s ease;
+}
+
+.service-hover:hover {
+  filter: brightness(1.1);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+/* Code typing animation */
+.typing-animation::after {
+  content: '|';
+  display: inline-block;
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* Timeline animations for Experience section - Backend & Cloud theme */
+.timeline-dot.active {
+  opacity: 1 !important;
+  transform: scale(1.3) !important;
+  background: linear-gradient(135deg, var(--tw-gradient-from), var(--tw-gradient-to)) !important;
+  border-color: white !important;
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.9), 0 0 8px 2px rgba(58, 114, 255, 0.6) !important;
+  transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1) !important;
+}
+
+.timeline-dot.active span {
+  opacity: 1 !important;
+  transform: scale(1) !important;
+  animation: pulsate 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulsate {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.8; transform: scale(0.92); }
+}
+
+.timeline-card.active {
+  opacity: 1 !important;
+  transform: translateX(0) !important;
+  animation: slideInFade 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+@keyframes slideInFade {
+  0% { opacity: 0; transform: translateY(10px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+/* Backend server activation animation */
+.server-element.server-active {
+  animation: server-activation 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+@keyframes server-activation {
+  0% {
+    opacity: 0.3;
+    transform: scale(0.9);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+  100% {
+    opacity: 0.8;
+    transform: scale(1);
+  }
+}
+
+/* Cloud element activation animation */
+.cloud-element.cloud-active {
+  animation: cloud-activation 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+@keyframes cloud-activation {
+  0% {
+    opacity: 0.2;
+    filter: blur(3px);
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 0.8;
+    filter: blur(0);
+    transform: translateY(0);
+  }
+}
+
+/* Card hover highlighting effect */
+.card-3d.card-hovering {
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  border-color: rgba(var(--tw-gradient-from-rgb), 0.3);
+}
+
+.dark .card-3d.card-hovering {
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.2);
+  border-color: rgba(var(--tw-gradient-from-rgb), 0.3);
+}
+
+/* Project Card Apple-style animations */
+.project-card-container {
+  perspective: 1000px;
+}
+
+.project-card {
+  transform: perspective(1000px) rotateX(0) rotateY(0);
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+}
+
+.project-card .architecture-diagram {
+  transform: translateZ(20px);
+  filter: drop-shadow(0px 5px 10px rgba(0, 0, 0, 0.15));
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), filter 0.8s ease;
+}
+
+.project-card:hover .architecture-diagram {
+  transform: translateZ(40px);
+  filter: drop-shadow(0px 10px 20px rgba(0, 0, 0, 0.2));
+}
+
+/* Card Tilt Effect */
+.card-3d {
+  transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+  transform-style: preserve-3d;
+  transform: perspective(1000px);
+}
+
+.card-3d:hover {
+  transform: perspective(1000px) rotateX(var(--rotate-x, -5deg)) rotateY(var(--rotate-y, 5deg)) translateZ(10px);
+}
+
+/* Data flow animations for backend visualizations */
+.data-flow-dot {
+  r: 3;
+  opacity: 0;
+  transform-origin: center;
+  animation: dataFlowTravel 3s ease-out infinite;
+}
+
+@keyframes dataFlowTravel {
+  0% {
+    opacity: 0;
+    transform: translateX(0) translateY(0);
+    r: 0;
+  }
+  10% {
+    opacity: 1;
+    r: 3;
+  }
+  90% {
+    opacity: 1;
+    r: 3;
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(var(--flow-x, 0)) translateY(var(--flow-y, 0));
+    r: 0;
+  }
+}
+
+/* Server rack visualization animation */
+.server-rack {
+  transform-origin: center bottom;
+  transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.server-rack:hover {
+  transform: scale(1.05);
+}
+
+.server-led {
+  animation: serverLedBlink 2s ease-in-out infinite;
+  animation-delay: var(--blink-delay, 0s);
+  opacity: 0.7;
+}
+
+@keyframes serverLedBlink {
+  0%, 100% { opacity: 0.2; }
+  50% { opacity: 0.9; }
+}
+
+/* Animations for fallback components when ThreeJS is not supported */
+.fallback-architecture {
+  opacity: 0.8;
+  transition: all 0.3s ease;
+}
+
+.fallback-architecture:hover {
+  opacity: 1;
+  filter: drop-shadow(0 0 8px rgba(16, 185, 129, 0.2));
+}
+
+/* Animation for data flow between network nodes */
+.network-line {
+  stroke-dasharray: 5;
+  stroke-dashoffset: 1000;
+  animation: flowLine 3s linear infinite;
+}
+
+@keyframes flowLine {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* Clean Cloud Architecture Animation */
+.cloud-architecture-animation .connections path {
+  stroke-dasharray: 4 4;
+}
+
+/* Elegant hover effects */
+.cloud-architecture-animation .service-node:hover circle {
+  stroke-width: 1.5;
+  opacity: 0.9;
+  transition: all 0.3s ease;
+}
+
+.cloud-architecture-animation .service-node:hover text {
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.cloud-platform:hover text {
+  font-weight: 700;
+  transition: all 0.3s ease;
+}
+
+/* Enhanced glow effects */
+.cloud-architecture-animation .data-flow circle {
+  filter: drop-shadow(0 0 2px rgba(14, 165, 233, 0.3));
+}
+
+/* Make sure SVGs are responsive */
+.cloud-architecture-animation svg,
+.devops-animation svg {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Subtle animations for elements */
+.cloud-platform circle,
+.service-node circle,
+.cloud-services rect {
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.cloud-platform circle:hover,
+.service-node circle:hover,
+.cloud-services rect:hover {
+  opacity: 0.9;
+  transform: scale(1.02);
+}
+
+/* Professional dark mode adjustments */
+.dark .cloud-architecture-animation .data-flow circle,
+.dark .devops-animation .data-flow circle {
+  filter: drop-shadow(0 0 3px rgba(14, 165, 233, 0.4));
+}
+
+/* Smooth animation optimization */
+.cloud-architecture-animation,
+.devops-animation {
+  will-change: transform;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+}
+
+/* Performance optimization - reduce repaints */
+.backend-architecture-animation,
+.devops-animation {
+  will-change: transform;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+/* Fix SVG filter IDs for multiple instances */
+.backend-architecture-animation [filter="url(#glow)"],
+.devops-animation [filter="url(#devops-glow)"] {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+/* Optimize visual hierarchy */
+.backend-architecture-animation text,
+.devops-animation text {
+  user-select: none;
+  pointer-events: none;
+}
+
+/* Animation for WebGL canvas loading */
+.canvas-loading {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(5px);
+  z-index: 10;
+}
+
+.canvas-loading::after {
+  content: "";
+  width: 40px;
+  height: 40px;
+  border: 2px solid rgba(16, 185, 129, 0.3);
+  border-top-color: rgba(16, 185, 129, 1);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Custom animation for gradient xy movement */
+.animate-gradient-xy {
+  background-size: 400% 400%;
+  animation: gradient-xy 15s ease infinite;
+}
+
+@keyframes gradient-xy {
+  0% {
+    background-position: 0% 0%;
+  }
+  25% {
+    background-position: 100% 0%;
+  }
+  50% {
+    background-position: 100% 100%;
+  }
+  75% {
+    background-position: 0% 100%;
+  }
+  100% {
+    background-position: 0% 0%;
+  }
+}
+
+/* Typewriter text styling */
+.Typewriter {
+  display: inline-block;
+  width: 100%;
+}
+
+.Typewriter__wrapper {
+  font-weight: 600 !important;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+.Typewriter__cursor {
+  color: currentColor;
+  opacity: 0.7;
+}
